@@ -1,15 +1,18 @@
 import numpy as np
+''' This file contains functions that work to build a complete sudoko board using numpys random to randomly fill the board.
+ '''
+
 
 b = np.arange(1,10)
 
 
-def one_row():
+def one_row(): #this function randomly lays down the first row of a sudoku puzzle.
 	a = np.zeros((9,9))
 	np.random.shuffle(b)
 	np.copyto(a[0,:],b)
 	return a
 
-def first_square(a):
+def first_square(a): #this function takes a sudoku puzzle with one row layed down and lays down the top left square.
 	alreadyThere = []
 	for x in range(0,3):
 		alreadyThere += [a[0,x]]
@@ -21,7 +24,7 @@ def first_square(a):
 
 	return a
 
-def second_square(a):
+def second_square(a): #this function randomly fills the second square of a sudoku puzzle.
 	alreadyThere = []
 	row_one = []
 	row_two = []
@@ -43,7 +46,7 @@ def second_square(a):
 	np.copyto(a[2,3:6],new_row_two)
 	return a
 
-def third_square(a):
+def third_square(a): #this function randomly completes the top 3 rows of a sudoku puzzle.
 	row_one = []
 	row_two = []
 	for x in range(0,6):
@@ -57,7 +60,7 @@ def third_square(a):
 	np.copyto(a[2,6:], row_two_needs)
 	return a
 
-def fourth_square(a):
+def fourth_square(a): #This function randomly lays the left middle square of a started sudoku board.
 	col_1 = []
 	col_2 = []
 	col_3 = []
@@ -84,7 +87,7 @@ def fourth_square(a):
 	np.copyto(a[3:6,2],exclusion2)
 	return a
 
-def fifth_square(a):
+def fifth_square(a): #this function lays the bottom left sudoku tiles in a partially filled sudoku board.
 	col_1 = []
 	col_2 = []
 	col_3 = []
@@ -104,7 +107,7 @@ def fifth_square(a):
 	np.copyto(a[6:,2], new_col_three)
 	return a
 
-def middle_square(a):
+def middle_square(a): #this funtion takes a half complete sudoko board and lays ther middle 9 tiles.
 	col_1 = []
 	col_2 = []
 	col_3 = []
@@ -157,7 +160,7 @@ def middle_square(a):
 	np.copyto(a[5,3:6], last_three)
 	return a
 
-def seventh_square(a):
+def seventh_square(a): #this function takes a partially filled sukoku board and lays the 7th square.
 	col_1 = []
 	col_2 = []
 	col_3 = []
@@ -206,7 +209,7 @@ def seventh_square(a):
 
 
 
-def ocho(a):
+def ocho(a): #this function takes a partially complete sudoku board and lays down the 8Th square
 	col_1 = []
 	col_2 = []
 	col_3 = []
@@ -252,7 +255,7 @@ def ocho(a):
 	np.copyto(a[6:,5],new_col_3)
 	return a
 
-def final_square(a):
+def final_square(a): #this function takes a mostly complete sudoku boards and finishes it
 	col_1 = []
 	col_2 = []
 	col_3 = []
@@ -266,7 +269,6 @@ def final_square(a):
 		row_1 += [a[6,x]]
 		row_2 += [a[7,x]]
 		row_3 += [a[8,x]]
-
 
 	new_col_1 = np.setdiff1d(b,col_1)
 	new_col_2 = np.setdiff1d(b, col_2)
@@ -298,7 +300,7 @@ def final_square(a):
 	np.copyto(a[6:,8],new_col_3)
 	return a
 
-def create_solved_puzzle():
+def create_solved_puzzle(): #This is a wrapper function to return the whole board complete
 	a = fifth_square(fourth_square(third_square(second_square(first_square(one_row())))))
 	return final_square(ocho(seventh_square(middle_square(a))))
 
