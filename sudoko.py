@@ -305,4 +305,63 @@ def create_solved_puzzle(): #This is a wrapper function to return the whole boar
 	return final_square(ocho(seventh_square(middle_square(a))))
 
 
-print(create_solved_puzzle())
+
+#This function takes a full puzzle and returns a partially covered puzzle based off of the difficulty
+def unsolve_puzzle(difficulty):
+	#allow for 4 increasing difficulties
+	a = create_solved_puzzle()
+	copy = a.copy()
+	allowed = set([1,2,3,4])
+	if difficulty not in allowed:
+		return 0
+	if(difficulty == 1):
+		for i in range(0,18):
+			x = np.random.randint(9)
+			y = np.random.randint(9)
+			copy[x,y] = 0
+		
+
+	if(difficulty == 2):
+		for i in range(0,32):
+			x = np.random.randint(9)
+			y = np.random.randint(9)
+			copy[x,y] = 0
+
+	if(difficulty == 3):
+		for i in range(0,45):
+			x = np.random.randint(9)
+			y = np.random.randint(9)
+			copy[x,y] = 0
+
+	if(difficulty == 4):
+		for i in range(0,62):
+			x = np.random.randint(9)
+			y = np.random.randint(9)
+			copy[x,y] = 0
+
+
+	return (copy , a)
+
+
+def play_game():
+	print("WELCOME TO SUDOKU, CHOOSE YOUR DIFFICULTY 1-4")
+	difficulty = int(input())
+	view, solution = unsolve_puzzle(difficulty)
+	print("INPUT: ROW COL NUM")
+	while(view.all() != solution.all()):
+		print(view)
+		woah = input().split()
+		for x in range(0,3):
+			woah[x] = int(woah[x])
+		if(solution[woah[0],woah[1]] == woah[2]):
+			view[woah[0], woah[1]] = woah[2]	
+		else:
+			print("nope")
+	print("Congrats on solving")	
+	return 0
+
+play_game()
+
+
+
+
