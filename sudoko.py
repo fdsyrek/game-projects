@@ -1,5 +1,6 @@
 import numpy as np
-''' This file contains functions that work to build a complete sudoko board using numpys random to randomly fill the board.
+''' This file contains functions that work to build a complete sudoko board using numpys random to randomly fill the board
+	Then use the board created to make an unfinished puzzle and an interface to complete the puzzle.
  '''
 
 
